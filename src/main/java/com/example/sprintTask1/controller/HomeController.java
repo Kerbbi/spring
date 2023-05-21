@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 @Controller
 public class HomeController {
-    @GetMapping(value = "/")
+    @GetMapping(value = "/home")
     public String homePage(Model model){
         ArrayList<Student> students= DBManager.getStudents();
         model.addAttribute("pupils",students);
@@ -23,7 +23,24 @@ public class HomeController {
     public String addPage(){
         return "addStudentPage";
     }
-    @PostMapping(value ="addStudentPage")
+    @PostMapping(value = "addStudentPage")
+    public String addStudent(Student student){
+        String mark="";
+        if(student.getExam()>=90){
+            mark="A";
+        } else if (student.getExam()>=89 || student.getExam()<=75) {
+            mark="B";
+        }else if (student.getExam()>=74 || student.getExam()<=60) {
+            mark="C";
+        }else if (student.getExam()>=59 || student.getExam()<=50) {
+            mark="D";
+        }else
+            mark="F";
+        student.setMark(mark);
+        DBManager.addStudent(student);
+        return "redirect:/home";
+    }
+    /*  @PostMapping(value ="addStudentPage")
     public  String addStudent(
             @RequestParam(name ="student_name")String name,
             @RequestParam(name ="student_surname")String surname,
@@ -46,6 +63,7 @@ public class HomeController {
          mark="F";
      student.setMark(mark);
      DBManager.addStudent(student);
-        return "redirect:/";
+        return "redirect:/home";
     }
+    */
 }
