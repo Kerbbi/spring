@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 
@@ -23,7 +24,28 @@ public class HomeController {
         return "addStudentPage";
     }
     @PostMapping(value ="addStudentPage")
-    public  Arraylist{
-
+    public  String addStudent(
+            @RequestParam(name ="student_name")String name,
+            @RequestParam(name ="student_surname")String surname,
+            @RequestParam(name ="student_exam")int exam
+    ){
+     Student student=new Student();
+     student.setName(name);
+     student.setSurname(surname);
+     student.setExam(exam);
+     String mark="";
+     if(student.getExam()>=90){
+         mark="A";
+     } else if (student.getExam()>=89 || student.getExam()<=75) {
+         mark="B";
+     }else if (student.getExam()>=74 || student.getExam()<=60) {
+         mark="C";
+     }else if (student.getExam()>=59 || student.getExam()<=50) {
+         mark="D";
+     }else
+         mark="F";
+     student.setMark(mark);
+     DBManager.addStudent(student);
+        return "redirect:/";
     }
 }
