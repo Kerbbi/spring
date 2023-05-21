@@ -28,11 +28,11 @@ public class HomeController {
         String mark="";
         if(student.getExam()>=90){
             mark="A";
-        } else if (student.getExam()>=89 || student.getExam()<=75) {
+        } else if (student.getExam()>=89 && student.getExam()<=75) {
             mark="B";
-        }else if (student.getExam()>=74 || student.getExam()<=60) {
+        }else if (student.getExam()>=74 && student.getExam()<=60) {
             mark="C";
-        }else if (student.getExam()>=59 || student.getExam()<=50) {
+        }else if (student.getExam()>=59 && student.getExam()<=50) {
             mark="D";
         }else
             mark="F";
