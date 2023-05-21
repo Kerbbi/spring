@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+                xmlns:layout="https://www.ultrag.net.nz/thymeleaf/layout">
+<head>
+    <link rel="stylesheet" th:insert="~{head.html}" >
+</head>
+<body>
+  <link th:insert="~{navbar.html}">
+  <div class="container mt-5" style="min-height: 800px;">
+  <div class="row ">
+      <div class="col-12">
+          <table class="table ">
+              <thead>
+              <tr>
+                  <th>ID</th>
+                  <th>NAME</th>
+                  <th>SURNAME</th>
+                  <th>EXAM</th>
+                  <th>MARK</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr th:each="pupil: ${pupils}" th:class="${pupil.exam>=50?'text-black;':'text-danger'}">
+                  <td th:text="${pupil.id}">ID</td>
+                  <td th:text="${pupil.name}">NAME</td>
+                  <td th:text="${pupil.surname}">SURNAME</td>
+                  <td th:text="${pupil.exam}">EXAM</td>
+                  <td th:text="${pupil.mark}">MARK</td>
+              </tr>
+              </tbody>
+          </table>
+      </div>
+  </div>
+</div>
+</body>
+</html>
